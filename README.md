@@ -2,7 +2,7 @@
 
 📱 Práctica de realidad aumentada para un smartphone Android utilizando Unity 3D como motor de desarrollo junto con el paquete de Vuforia. La práctica será una variante simplificada del juego Angry Birds AR.
 
-## Objetivo
+## 🎯 Objetivo
 El objetivo de esta práctica consiste en desarrollar una aplicación de realidad aumentada para un smartphone Android utilizando Unity 3D como motor de desarrollo junto con el paquete de Vuforia. La práctica será una variante simplificada del juego Angry Birds AR.
 
 ## Mecánica del juego
