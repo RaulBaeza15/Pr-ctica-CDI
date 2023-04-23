@@ -33,7 +33,23 @@ public class GeneradorTorre : MonoBehaviour
              
              ladrilloX.transform.position=new Vector3(desajusteCubo+i*2+alturaActual%2,1+alturaActual,0);
              ladrilloX.name="LadrilloX"+i+'_'+alturaActual;
-             //ladrilloX.AddComponent<Rigidbody>();
+             ladrilloX.AddComponent<Rigidbody>();
+             Renderer renderer = ladrilloX.GetComponent<Renderer>();
+
+             
+
+             // Asigna el nuevo material al objeto
+             renderer.material = materialRandom();
+        }
+        for(int i =0;i<anchoX;i++){
+
+             GameObject ladrilloX =GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+             ladrilloX.transform.localScale=new Vector3(2,1,1);
+             
+             ladrilloX.transform.position=new Vector3(desajusteCubo+i*2+(alturaActual+1)%2,1+alturaActual,anchoZ*2);
+             ladrilloX.name="LadrilloXPared"+i+'_'+alturaActual;
+             ladrilloX.AddComponent<Rigidbody>();
              Renderer renderer = ladrilloX.GetComponent<Renderer>();
 
              
@@ -53,7 +69,7 @@ public class GeneradorTorre : MonoBehaviour
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
              ladrilloZ.transform.position=new Vector3(0,1+alturaActual,i*2-alturaActual%2+1+desajusteCubo);
              ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
-             //ladrilloZ.AddComponent<Rigidbody>();
+             ladrilloZ.AddComponent<Rigidbody>();
              Renderer renderer = ladrilloZ.GetComponent<Renderer>();
 
              
@@ -66,9 +82,9 @@ public class GeneradorTorre : MonoBehaviour
              GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
 
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
-             ladrilloZ.transform.position=new Vector3(anchoX*2,1+alturaActual,i*2-alturaActual%2+1+desajusteCubo);
-             ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
-             //ladrilloZ.AddComponent<Rigidbody>();
+             ladrilloZ.transform.position=new Vector3(anchoX*2,1+alturaActual,i*2+alturaActual%2+desajusteCubo);
+             ladrilloZ.name="LadrilloZPared"+i+'_'+alturaActual;
+             ladrilloZ.AddComponent<Rigidbody>();
              Renderer renderer = ladrilloZ.GetComponent<Renderer>();
 
              
