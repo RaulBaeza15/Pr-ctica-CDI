@@ -17,22 +17,28 @@ public class GeneradorTorre : MonoBehaviour
         ladrilloZ.transform.localScale=new Vector3(1,1,2);
         
         ladrilloZ.transform.position=new Vector3(-5,1,5);
+        for(int i =0;i<altura;i++){
+             hiladaX(i);
+        }
         
-        hiladaX(0);
         
         //instancia2.GetComponent<Renderer>().material = rojoMaterial;
         
     }
     private void hiladaX(int alturaActual){
-        GameObject ladrilloX= Instantiate (cuboPrefab);
-        ladrilloX.transform.localScale=new Vector3(2,1,1);
-        ladrilloX.transform.position=new Vector3(5,1+alturaActual,5);
+        
+       
+        
 
-        for(int i =1;i<anchoX;i++){
-             GameObject amor =Instantiate(ladrilloX, ladrilloX.transform.position + new Vector3(i*2, 0, 0), Quaternion.identity);
-             amor.name="X"+i+'_'+alturaActual;
+        for(int i =0;i<anchoX;i++){
 
-             Renderer renderer = amor.GetComponent<Renderer>();
+             GameObject ladrilloX =GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+             ladrilloX.transform.localScale=new Vector3(2,1,1);
+             ladrilloX.transform.position=new Vector3(5+i*2+alturaActual%2,1+alturaActual,5);
+             ladrilloX.name="LadrilloX"+i+'_'+alturaActual;
+             ladrilloX.AddComponent<Rigidbody>();
+             Renderer renderer = ladrilloX.GetComponent<Renderer>();
 
              
 
