@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class GeneradorTorre : MonoBehaviour
 {
-    public int altura = 5; // La altura de la torre en cubos
-    public int anchoX = 5; // El ancho de la base de la torre en cubos
-    public int anchoZ = 3; // El ancho de la parte superior de la torre en cubos
-    
+     public int altura = 5; // La altura de la torre en cubos
+     public int anchoX = 5; // El ancho de la base de la torre en cubos
+     public int anchoZ = 3; // El ancho de la parte superior de la torre en cubos
+     public bool rigid =false;
+     public float salto = 0.5f;
+     float inicioX ;
+     float inicioZ;
+     private void rigido(GameObject objeto){
+         if (rigid){
+             objeto.AddComponent<Rigidbody>();
+         }
+     } 
 
-    void Start()
-    {   
-        
+     void Start() {   
+         inicioX =transform.position.x;
+         inicioZ=transform.position.z;
+        Debug.Log(transform.position.x);
         for(int i =0;i<altura;i++){
              
              hiladaX(i);
@@ -36,9 +45,10 @@ public class GeneradorTorre : MonoBehaviour
 
              ladrilloX.transform.localScale=new Vector3(2,1,1);
              
-             ladrilloX.transform.position=new Vector3(desajusteCubo+i*2+alturaActual%2,alturaActual,0);
+             ladrilloX.transform.position=new Vector3(inicioX+desajusteCubo+i*2+alturaActual%2,alturaActual+salto,inicioZ+0);
              ladrilloX.name="LadrilloX"+i+'_'+alturaActual;
-             //ladrilloX.AddComponent<Rigidbody>();
+             rigido(ladrilloX);
+             
              
 
              Renderer renderer = ladrilloX.GetComponent<Renderer>();
@@ -61,9 +71,9 @@ public class GeneradorTorre : MonoBehaviour
 
              ladrilloX.transform.localScale=new Vector3(2,1,1);
              
-             ladrilloX.transform.position=new Vector3(desajusteCubo+i*2+(alturaActual+1)%2,alturaActual,anchoZ*2);
+             ladrilloX.transform.position=new Vector3(inicioX+desajusteCubo+i*2+(alturaActual+1)%2,alturaActual+salto,inicioZ+anchoZ*2);
              ladrilloX.name="LadrilloXPared"+i+'_'+alturaActual;
-             ladrilloX.AddComponent<Rigidbody>();
+             rigido(ladrilloX);
              Renderer renderer = ladrilloX.GetComponent<Renderer>();
              // Asigna el nuevo material al objeto
              renderer.material = materialRandom();
@@ -82,9 +92,9 @@ public class GeneradorTorre : MonoBehaviour
              GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
 
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
-             ladrilloZ.transform.position=new Vector3(0,alturaActual,i*2-alturaActual%2+1+desajusteCubo);
+             ladrilloZ.transform.position=new Vector3(inicioX+0,alturaActual+salto,i*2-alturaActual%2+1+desajusteCubo+inicioZ);
              ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
-             ladrilloZ.AddComponent<Rigidbody>();
+             rigido(ladrilloZ);
 
              Renderer renderer = ladrilloZ.GetComponent<Renderer>();
              // Asigna el nuevo material al objeto
@@ -102,9 +112,9 @@ public class GeneradorTorre : MonoBehaviour
              GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
 
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
-             ladrilloZ.transform.position=new Vector3(anchoX*2,alturaActual,i*2+alturaActual%2+desajusteCubo);
+             ladrilloZ.transform.position=new Vector3(inicioX+anchoX*2,alturaActual+salto,i*2+alturaActual%2+desajusteCubo+inicioZ);
              ladrilloZ.name="LadrilloZPared"+i+'_'+alturaActual;
-             ladrilloZ.AddComponent<Rigidbody>();
+             rigido(ladrilloZ);
              
              Renderer renderer = ladrilloZ.GetComponent<Renderer>();
              // Asigna el nuevo material al objeto
