@@ -7,18 +7,14 @@ public class GeneradorTorre : MonoBehaviour
     public int altura = 5; // La altura de la torre en cubos
     public int anchoX = 5; // El ancho de la base de la torre en cubos
     public int anchoZ = 3; // El ancho de la parte superior de la torre en cubos
-    public Material rojoMaterial;
-    public GameObject cuboPrefab; // El prefab del cubo que se utilizará para construir la torre
+    
 
     void Start()
     {   
-        GameObject ladrilloZ= Instantiate (cuboPrefab);
         
-        ladrilloZ.transform.localScale=new Vector3(1,1,2);
-        
-        ladrilloZ.transform.position=new Vector3(-5,1,5);
         for(int i =0;i<altura;i++){
              hiladaX(i);
+             hiladaZ(i);
         }
         
         
@@ -26,8 +22,7 @@ public class GeneradorTorre : MonoBehaviour
         
     }
     private void hiladaX(int alturaActual){
-        
-       
+        float desajusteCubo=0.5f;
         
 
         for(int i =0;i<anchoX;i++){
@@ -35,10 +30,46 @@ public class GeneradorTorre : MonoBehaviour
              GameObject ladrilloX =GameObject.CreatePrimitive(PrimitiveType.Cube);
 
              ladrilloX.transform.localScale=new Vector3(2,1,1);
-             ladrilloX.transform.position=new Vector3(5+i*2+alturaActual%2,1+alturaActual,5);
+             
+             ladrilloX.transform.position=new Vector3(desajusteCubo+i*2+alturaActual%2,1+alturaActual,0);
              ladrilloX.name="LadrilloX"+i+'_'+alturaActual;
-             ladrilloX.AddComponent<Rigidbody>();
+             //ladrilloX.AddComponent<Rigidbody>();
              Renderer renderer = ladrilloX.GetComponent<Renderer>();
+
+             
+
+             // Asigna el nuevo material al objeto
+             renderer.material = materialRandom();
+        }
+
+    }
+    private void hiladaZ(int alturaActual){
+        float desajusteCubo=0.5f;
+
+        for(int i =0;i<anchoZ;i++){
+
+             GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+             ladrilloZ.transform.localScale=new Vector3(1,1,2);
+             ladrilloZ.transform.position=new Vector3(0,1+alturaActual,i*2-alturaActual%2+1+desajusteCubo);
+             ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
+             //ladrilloZ.AddComponent<Rigidbody>();
+             Renderer renderer = ladrilloZ.GetComponent<Renderer>();
+
+             
+
+             // Asigna el nuevo material al objeto
+             renderer.material = materialRandom();
+        }
+        for(int i =0;i<anchoZ;i++){
+
+             GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+             ladrilloZ.transform.localScale=new Vector3(1,1,2);
+             ladrilloZ.transform.position=new Vector3(anchoX*2,1+alturaActual,i*2-alturaActual%2+1+desajusteCubo);
+             ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
+             //ladrilloZ.AddComponent<Rigidbody>();
+             Renderer renderer = ladrilloZ.GetComponent<Renderer>();
 
              
 
