@@ -29,10 +29,19 @@ public class CsvManager : MonoBehaviour
         }
 
         // Acceder a los datos de la matriz
-        Debug.Log("Fila 1, Columna 2: " + csvData[0, 1]);
+    
+        español();
     }
     public void español(){
 
+         for (int i = 0; i < csvData.GetLength(0); i++) {
+             string value = csvData[i, 0];
+                   Debug.Log(value);
+                    
+                 // hacer algo con el valor de la celda
+         }
+
+             
     }
 }
 
