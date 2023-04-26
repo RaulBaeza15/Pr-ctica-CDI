@@ -11,7 +11,7 @@ public class GeneradorTorre : MonoBehaviour
      public float salto = 0.5f;
      float inicioX ;
      float inicioZ;
-     
+     public Transform parentObject;
      private void rigido(GameObject objeto){
          if (rigid){
              objeto.AddComponent<Rigidbody>();
@@ -44,6 +44,7 @@ public class GeneradorTorre : MonoBehaviour
         for(int i =0;i<anchoX;i++){
 
              GameObject ladrilloX =GameObject.CreatePrimitive(PrimitiveType.Cube);
+             ladrilloX.transform.parent = parentObject; // establece el padre del objeto creado
 
              ladrilloX.transform.localScale=new Vector3(2,1,1);
              
@@ -70,7 +71,7 @@ public class GeneradorTorre : MonoBehaviour
         for(int i =0;i<anchoX;i++){
 
              GameObject ladrilloX =GameObject.CreatePrimitive(PrimitiveType.Cube);
-
+             ladrilloX.transform.parent = parentObject; // establece el padre del objeto creado
              ladrilloX.transform.localScale=new Vector3(2,1,1);
              
              ladrilloX.transform.position=new Vector3(inicioX+desajusteCubo+i*2+(alturaActual+1)%2,alturaActual+salto,inicioZ+anchoZ*2);
@@ -92,7 +93,7 @@ public class GeneradorTorre : MonoBehaviour
         for(int i =0;i<anchoZ;i++){
 
              GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
-
+             ladrilloZ.transform.parent = parentObject; // establece el padre del objeto creado
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
              ladrilloZ.transform.position=new Vector3(inicioX+0,alturaActual+salto,i*2-alturaActual%2+1+desajusteCubo+inicioZ);
              ladrilloZ.name="LadrilloZ"+i+'_'+alturaActual;
@@ -112,7 +113,7 @@ public class GeneradorTorre : MonoBehaviour
         for(int i =0;i<anchoZ;i++){
 
              GameObject ladrilloZ =GameObject.CreatePrimitive(PrimitiveType.Cube);
-
+             ladrilloZ.transform.parent = parentObject; // establece el padre del objeto creado
              ladrilloZ.transform.localScale=new Vector3(1,1,2);
              ladrilloZ.transform.position=new Vector3(inicioX+anchoX*2,alturaActual+salto,i*2+alturaActual%2+desajusteCubo+inicioZ);
              ladrilloZ.name="LadrilloZPared"+i+'_'+alturaActual;
