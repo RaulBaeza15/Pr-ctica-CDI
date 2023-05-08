@@ -8,6 +8,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
      public int altura = 20; // La altura de la torre en cubos
      public int anchoX = 6; // El ancho de la base de la torre en cubos
      public int anchoZ = 6; // El ancho de la parte superior de la torre en cubos
+        public bool cuadrada = true;
      public bool rigid =true;
       int contadorLadrillos = 0;
      float inicioX ;
