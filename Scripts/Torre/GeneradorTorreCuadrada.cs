@@ -12,7 +12,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
       int contadorLadrillos = 0;
      float inicioX ;
      float inicioZ;
-    public GameObject imageTarget;
+    public ImageTargetBehaviour imageTarget;
 
     private void rigido(GameObject objeto){
          if (rigid){
@@ -23,13 +23,9 @@ public class GeneradorTorreCuadrada : MonoBehaviour
 
     private void dimensionesCarta()
     {
-        Renderer targetRenderer = imageTarget.GetComponent<Renderer>();
-        if (targetRenderer != null)
-        {
-            Vector3 targetSize = targetRenderer.bounds.size;
-            Debug.Log("Las dimensiones del Image Target son: " + targetSize);
-        }
+        Debug.Log("target imagineo " + imageTarget.GetSize());
     }
+
 
     public void construirTorre()
     {
