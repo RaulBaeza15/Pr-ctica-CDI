@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LanzadorDePelota : MonoBehaviour
 {
-    public GameObject pelotaPrefab;
+    
     public GameObject puntoDeLanzamiento;
     public float fuerzaLanzamiento = 10f;
     public Transform parentObject;
@@ -16,8 +16,9 @@ public class LanzadorDePelota : MonoBehaviour
 
     void LanzarPelota()
     {
-        GameObject pelota = Instantiate(pelotaPrefab, puntoDeLanzamiento.transform.position, puntoDeLanzamiento.transform.rotation);
-        Rigidbody pelotaRigidbody = pelota.GetComponent<Rigidbody>();
+        GameObject pelota = Instantiate(spherePrefab, transform.position, Quaternion.identity);
+    }
+    Rigidbody pelotaRigidbody = pelota.GetComponent<Rigidbody>();
 
         if (pelotaRigidbody != null)
         {
