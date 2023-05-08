@@ -20,6 +20,11 @@ public class GeneradorTorre : MonoBehaviour
 
      void Start() {
         GameObject plano = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        
+
+        plano.transform.localScale = new Vector3(anchoX, 1f, anchoZ);
+        plano.transform.parent = parentObject; // establece el padre del objeto creado
+
         inicioX =transform.position.x;
          inicioZ=transform.position.z;
         
