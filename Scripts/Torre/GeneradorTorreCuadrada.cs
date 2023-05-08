@@ -8,7 +8,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
      public int anchoX = 6; // El ancho de la base de la torre en cubos
      public int anchoZ = 6; // El ancho de la parte superior de la torre en cubos
      public bool rigid =true;
-     float salto = 0.5f;
+     
      float inicioX ;
      float inicioZ;
      
@@ -28,34 +28,91 @@ public class GeneradorTorreCuadrada : MonoBehaviour
          inicioZ=transform.position.z;
         
         for(int i =0;i<altura;i++){
-             
-             hiladaX(i);
-             hiladaZ(i);
-            hiladaXPared(i);
-             hiladaZPared(i);
-
+           
+            for (int j = 0; j < 4; j++)
+            {
+                hilera(i,j);
+                
+            }
+        }
+    }
+    private void hilera(int alturaActual, int tipo )
+    {
+        int ancho;
+        if (tipo%2 ==0)
+        {
+            ancho = anchoX;
+        }else
+        {
+            ancho = anchoZ;
+        }
+        for (int i = 0; i < ancho; i++)
+        {
+            GameObject ladrillo = cuboPrimitivo();
+            escalarALadrillo(ladrillo,tipo);
+            posicionarLadrillo(ladrillo, i, alturaActual, tipo);
+            nombrarLadrillo(ladrillo, tipo, i, alturaActual);
+            rigido(ladrillo);
+            colorearLadrillo(ladrillo);
         }
     }
    private GameObject cuboPrimitivo()
     {
         return GameObject.CreatePrimitive(PrimitiveType.Cube);
     }
-    private void escalarALadrilloX(GameObject ladrillo)
+    
+    private void escalarALadrillo(GameObject ladrillo, int tipo)
     {
-        ladrillo.transform.localScale = new Vector3(2, 1, 1);
+        if (tipo % 2 == 0)
+        {
+            ladrillo.transform.localScale = new Vector3(2, 1, 1);
+        }
+        else
+        {
+            ladrillo.transform.localScale = new Vector3(1, 1, 2);
+        }
+
     }
-    private void escalarALadrilloZ(GameObject ladrillo)
+    private void posicionarLadrillo(GameObject ladrillo, int recorrido, int alturaActual, int tipo)
     {
-        ladrillo.transform.localScale = new Vector3(1, 1, 2);
-    }
-    private void posicionarLadrillo(GameObject ladrillo, int recorrido, int alturaActual)
-    {
-        float desajusteDeHilera = alturaActual % 2;
         float desnivelSuelo = 0.5f;
-        float altura = alturaActual + desnivelSuelo;
-        float posicionX = inicioX + 0.5f + recorrido * 2 + desajusteDeHilera;
-        float posicionZ = inicioZ;
-        ladrillo.transform.position = new Vector3(posicionX, altura, posicionZ);
+        float alturaY=0;
+        float posicionX=0;
+        float posicionZ=0;
+        if (tipo == 0)
+        {
+            float desajusteDeHilera = alturaActual % 2;
+            
+             alturaY = alturaActual + desnivelSuelo;
+             posicionX = inicioX + 0.5f + recorrido * 2 + desajusteDeHilera;
+             posicionZ = inicioZ;
+             ladrillo.transform.position = new Vector3(posicionX, alturaY, posicionZ);
+
+        }else if(tipo == 1)
+        {
+            posicionX = inicioX;
+            alturaY = alturaActual + desnivelSuelo;
+            posicionZ = recorrido * 2 - alturaActual % 2 + 1 + desnivelSuelo + inicioZ;
+            
+            ladrillo.transform.position = new Vector3(posicionX, alturaY, posicionZ);
+        }
+        else if(tipo == 2)
+        {
+            posicionX = inicioX + 0.5f + recorrido * 2 + (alturaActual + 1) % 2;
+            alturaY = alturaActual + desnivelSuelo;
+            posicionZ = inicioZ + anchoZ * 2;
+            
+            ladrillo.transform.position = new Vector3(posicionX, alturaY, posicionZ);
+        }
+        else if (tipo == 3)
+        {
+           
+            posicionX = inicioX + anchoX * 2;
+            alturaY = alturaActual + desnivelSuelo;
+            posicionZ = recorrido * 2 + alturaActual % 2 + desnivelSuelo + inicioZ;
+            
+            ladrillo.transform.position = new Vector3(posicionX, alturaY, posicionZ);
+        }
         
     }
     
@@ -66,71 +123,14 @@ public class GeneradorTorreCuadrada : MonoBehaviour
         renderer.material = materialRandom();
     }
 
-    private void hiladaX(int alturaActual){   
-        for(int i =0;i<anchoX;i++){
-             GameObject ladrilloX = cuboPrimitivo();
-             escalarALadrilloX(ladrilloX);            
-             posicionarLadrillo(ladrilloX, i, alturaActual);            
-             nombrarLadrillo(ladrilloX, "X", "1", i, alturaActual);
-             rigido(ladrilloX);                     
-             colorearLadrillo( ladrilloX);
-        }    
-    }
     
-    private void hiladaXPared(int alturaActual){
-        float desajusteCubo=0.5f;
-        
-        for(int i =0;i<anchoX;i++){
-
-             GameObject ladrilloX = cuboPrimitivo();
-             escalarALadrilloX(ladrilloX);
-             
-             ladrilloX.transform.position=new Vector3(inicioX+desajusteCubo+i*2+(alturaActual+1)%2,alturaActual+salto,inicioZ+anchoZ*2);
-             
-             nombrarLadrillo(ladrilloX, "X", "2", i, alturaActual);
-             rigido(ladrilloX);
-             colorearLadrillo(ladrilloX);
-
-
-
-        }
-
-    }
-   
-    private void hiladaZ(int alturaActual){
-        float desajusteCubo=0.5f;
-        for(int i =0;i<anchoZ;i++){
-             GameObject ladrilloZ = cuboPrimitivo();
-             escalarALadrilloZ(ladrilloZ);
-             ladrilloZ.transform.position=new Vector3(inicioX+0,alturaActual+salto,i*2-alturaActual%2+1+desajusteCubo+inicioZ);
-             nombrarLadrillo(ladrilloZ, "Z", "1", i, alturaActual);
-             rigido(ladrilloZ);
-             colorearLadrillo(ladrilloZ);
-        }
-        
-
-    }
-    private void nombrarLadrillo(GameObject ladrillo,string eje, string pared, int recorrido, int alturaActual)
+    
+    
+    private void nombrarLadrillo(GameObject ladrillo,int tipo, int recorrido, int alturaActual)
     {
-        ladrillo.name = "Ladrillo"+eje+'P'+pared+'A'+alturaActual+'R'+recorrido;
+        ladrillo.name = "Ladrillo"+tipo+'A'+alturaActual+'R'+recorrido;
     }
-    private void hiladaZPared(int alturaActual){
-        float desajusteCubo=0.5f;
-
     
-        for(int i =0;i<anchoZ;i++){
-
-             GameObject ladrilloZ = cuboPrimitivo();
-             escalarALadrilloZ(ladrilloZ);
-            ladrilloZ.transform.position=new Vector3(inicioX+anchoX*2,alturaActual+salto,i*2+alturaActual%2+desajusteCubo+inicioZ);
-           
-            nombrarLadrillo(ladrilloZ, "Z","2",i, alturaActual);
-             rigido(ladrilloZ);
-
-             colorearLadrillo(ladrilloZ);
-        }
-
-    }
     private Material materialRandom(){
         // Crea un nuevo material
          float r = Random.Range(0.0f, 1.0f);
