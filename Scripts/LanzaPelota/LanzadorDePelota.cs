@@ -4,8 +4,8 @@ public class LanzadorDePelota : MonoBehaviour
 {
     
     public GameObject puntoDeLanzamiento;
-    public float fuerzaLanzamiento = 10f;
-    public Transform parentObject;
+    public float fuerzaLanzamiento = 100f;
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -16,10 +16,16 @@ public class LanzadorDePelota : MonoBehaviour
 
     void LanzarPelota()
     {
-        GameObject pelota = Instantiate(spherePrefab, transform.position, Quaternion.identity);
-    }
-    Rigidbody pelotaRigidbody = pelota.GetComponent<Rigidbody>();
+        GameObject pelota = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //pelota.transform.parent = parentObject; // establece el padre del objeto creado
+        pelota.AddComponent<Rigidbody>();
 
+        Rigidbody pelotaRigidbody = pelota.GetComponent<Rigidbody>();
+        Renderer renderer = pelota.GetComponent<Renderer>();
+        // Asigna el nuevo material al objeto
+        renderer.material = materialRandom();
+        pelota.transform.localScale *= 2;
+        pelota.transform.position=puntoDeLanzamiento.transform.position;
         if (pelotaRigidbody != null)
         {
             pelotaRigidbody.AddForce(puntoDeLanzamiento.transform.forward * fuerzaLanzamiento, ForceMode.Impulse);
@@ -28,5 +34,18 @@ public class LanzadorDePelota : MonoBehaviour
         {
             Debug.LogError("El objeto de la pelota no tiene un componente Rigidbody.");
         }
+    }
+    private Material materialRandom()
+    {
+        // Crea un nuevo material
+        float r = Random.Range(0.0f, 1.0f);
+        float g = Random.Range(0.0f, 1.0f);
+        float b = Random.Range(0.0f, 1.0f);
+
+        Material newMaterial = new Material(Shader.Find("Standard"));
+
+        // Configura los valores RGB del material
+        newMaterial.color = new Color(r, g, b);
+        return newMaterial;
     }
 }

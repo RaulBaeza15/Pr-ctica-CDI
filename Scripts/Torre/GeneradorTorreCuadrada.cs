@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneradorTorre : MonoBehaviour
+public class GeneradorTorreCuadrada : MonoBehaviour
 {
      public int altura = 10; // La altura de la torre en cubos
      public int anchoX = 10; // El ancho de la base de la torre en cubos
@@ -19,11 +19,20 @@ public class GeneradorTorre : MonoBehaviour
      } 
 
      void Start() {
+
+
+        //construirTorre();
+        
+        
+        
+    }
+    public void construirTorre()
+    {
         GameObject plano = GameObject.CreatePrimitive(PrimitiveType.Plane);
         
 
         plano.transform.localScale = new Vector3(anchoX, 1f, anchoZ);
-        plano.transform.parent = parentObject; // establece el padre del objeto creado
+    plano.transform.parent = parentObject; // establece el padre del objeto creado
 
         inicioX =transform.position.x;
          inicioZ=transform.position.z;
@@ -31,16 +40,11 @@ public class GeneradorTorre : MonoBehaviour
         for(int i =0;i<altura;i++){
              
              hiladaX(i);
-             hiladaZ(i);
-             hiladaXPared(i);
-             hiladaZPared(i);
-             
-        }
+    hiladaZ(i);
+    hiladaXPared(i);
+    hiladaZPared(i);
 
-        
-        
-        //instancia2.GetComponent<Renderer>().material = rojoMaterial;
-        
+}
     }
    
     private void hiladaX(int alturaActual){
