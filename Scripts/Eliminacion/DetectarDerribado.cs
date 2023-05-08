@@ -9,7 +9,14 @@ public class DetectarDerribado : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cubos();
+
+
+    }
+    public void cubos()
+    {
         GameObject[] cubos = FindObjectsOfType<GameObject>();
+        Debug.Log("Los Cubos:\n");
         foreach (GameObject cubo in cubos)
         {
             MeshRenderer renderer = cubo.GetComponent<MeshRenderer>();
@@ -19,8 +26,6 @@ public class DetectarDerribado : MonoBehaviour
                 Debug.Log("Encontré un cubo: " + cubo.name);
             }
         }
-
-
     }
 
     // Update is called once per frame

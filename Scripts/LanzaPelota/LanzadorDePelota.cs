@@ -1,11 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
 public class LanzadorDePelota : MonoBehaviour
 {
     
     public GameObject puntoDeLanzamiento;
     public float fuerzaLanzamiento = 100f;
-    
+    public float tiempoDeVida = 10f;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -26,6 +28,7 @@ public class LanzadorDePelota : MonoBehaviour
         renderer.material = materialRandom();
         pelota.transform.localScale *= 2;
         pelota.transform.position=puntoDeLanzamiento.transform.position;
+        StartCoroutine(DestruirDespuesDeTiempo(pelota));
         if (pelotaRigidbody != null)
         {
             pelotaRigidbody.AddForce(puntoDeLanzamiento.transform.forward * fuerzaLanzamiento, ForceMode.Impulse);
@@ -34,6 +37,11 @@ public class LanzadorDePelota : MonoBehaviour
         {
             Debug.LogError("El objeto de la pelota no tiene un componente Rigidbody.");
         }
+    }
+    private IEnumerator DestruirDespuesDeTiempo(GameObject pelota)
+    {
+        yield return new WaitForSeconds(tiempoDeVida);
+        Destroy(pelota);
     }
     private Material materialRandom()
     {
