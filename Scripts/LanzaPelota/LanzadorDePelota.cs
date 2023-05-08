@@ -5,7 +5,7 @@ public class LanzadorDePelota : MonoBehaviour
     public GameObject pelotaPrefab;
     public GameObject puntoDeLanzamiento;
     public float fuerzaLanzamiento = 10f;
-
+    public Transform parentObject;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

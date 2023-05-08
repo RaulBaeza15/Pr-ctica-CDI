@@ -18,8 +18,9 @@ public class GeneradorTorre : MonoBehaviour
          }
      } 
 
-     void Start() {   
-         inicioX =transform.position.x;
+     void Start() {
+        GameObject plano = GameObject.CreatePrimitive(PrimitiveType.Plane);
+        inicioX =transform.position.x;
          inicioZ=transform.position.z;
         
         for(int i =0;i<altura;i++){
