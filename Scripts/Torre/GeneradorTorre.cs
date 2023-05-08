@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GeneradorTorre : MonoBehaviour
 {
-     public int altura = 5; // La altura de la torre en cubos
-     public int anchoX = 5; // El ancho de la base de la torre en cubos
-     public int anchoZ = 3; // El ancho de la parte superior de la torre en cubos
+     public int altura = 10; // La altura de la torre en cubos
+     public int anchoX = 10; // El ancho de la base de la torre en cubos
+     public int anchoZ = 5; // El ancho de la parte superior de la torre en cubos
      public bool rigid =false;
      public float salto = 0.5f;
      float inicioX ;
