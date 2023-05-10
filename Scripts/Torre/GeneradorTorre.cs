@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class GeneradorTorreCuadrada : MonoBehaviour
+public class GeneradorTorre : MonoBehaviour
 {
      public int altura = 20; // La altura de la torre en cubos
      public int anchoX = 6; // El ancho de la base de la torre en cubos
@@ -13,7 +13,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
       int contadorLadrillos = 0;
      float inicioX ;
      float inicioZ;
-    public ImageTargetBehaviour imageTarget;
+    public Transform Papa;
 
     private void rigido(GameObject objeto){
          if (rigid){
@@ -22,10 +22,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
      }
     
 
-    private void dimensionesCarta()
-    {
-        Debug.Log("target imagineo " + imageTarget.GetSize());
-    }
+   
 
 
     public void construirTorre()
@@ -44,7 +41,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
             }
         }
         Debug.Log("Numero de Ladrillos "+contadorLadrillos);
-        dimensionesCarta();
+        
     }
     private void hilera(int alturaActual, int tipo )
     {
@@ -59,6 +56,7 @@ public class GeneradorTorreCuadrada : MonoBehaviour
         for (int i = 0; i < ancho; i++)
         {
             GameObject ladrillo = cuboPrimitivo();
+            ladrillo.transform.SetParent(Papa);
             contadorLadrillos++;
             escalarALadrillo(ladrillo,tipo);
             posicionarLadrillo(ladrillo, i, alturaActual, tipo);
