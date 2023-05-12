@@ -8,11 +8,13 @@ public class GeneradorTorre : MonoBehaviour
      public int altura = 20; // La altura de la torre en cubos
      public int anchoX = 6; // El ancho de la base de la torre en cubos
      public int anchoZ = 6; // El ancho de la parte superior de la torre en cubos
-        public bool cuadrada = true;
+     public bool cuadrada = true;
      public bool rigid =true;
-      int contadorLadrillos = 0;
+     bool PreviamenteConstruido=false;
+     int contadorLadrillos = 0;
      float inicioX ;
      float inicioZ;
+     public Transform carta;
     public Transform Papa;
 
     private void rigido(GameObject objeto){
@@ -26,22 +28,41 @@ public class GeneradorTorre : MonoBehaviour
 
 
     public void construirTorre()
-    {
-        GameObject plano = GameObject.CreatePrimitive(PrimitiveType.Plane);  
-        plano.transform.localScale = new Vector3(anchoX, 1f, anchoZ);
-        inicioX =transform.position.x;
-         inicioZ=transform.position.z;
-        
-        for(int i =0;i<altura;i++){
-           
-            for (int j = 0; j < 4; j++)
-            {
-                hilera(i,j);
-                
+    {   if (!PreviamenteConstruido){
+            PreviamenteConstruido=true;
+            
+            GameObject plano = cuboPrimitivo();
+            plano.transform.localScale = new Vector3(2*anchoX+2, 1f, 2*anchoZ+2);
+            plano.transform.position=carta.position;
+            plano.transform.position = new Vector3(plano.transform.position.x-1, -0.5f, plano.transform.position.z-1);
+            plano.transform.SetParent(Papa);
+            MeshRenderer meshRenderer = plano.GetComponent<MeshRenderer>();
+
+            // Obtener el tamaño del plano (ancho y largo) en unidades del mundo
+            Vector3 planoTamano = meshRenderer.bounds.size;
+
+            // Obtener la posición del centro del plano en el mundo
+            Vector3 planoPosicion = transform.position;
+
+            // Calcular la esquina inferior izquierda del plano
+            Vector3 esquinaInferiorIzquierda = planoPosicion - new Vector3(planoTamano.x / 2, 0, planoTamano.z / 2);
+
+            
+            inicioX =carta.position.x;
+            inicioZ=carta.position.z;
+            inicioX =esquinaInferiorIzquierda.x;
+            inicioZ=esquinaInferiorIzquierda.z;
+            
+            for(int i =0;i<altura;i++){
+            
+                for (int j = 0; j < 4; j++)
+                {
+                    hilera(i,j);
+                    
+                }
             }
+            Debug.Log("Numero de Ladrillos "+contadorLadrillos);
         }
-        Debug.Log("Numero de Ladrillos "+contadorLadrillos);
-        
     }
     private void hilera(int alturaActual, int tipo )
     {
