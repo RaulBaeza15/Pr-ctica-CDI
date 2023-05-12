@@ -1,0 +1,15 @@
+Requisitos
+-P?antalla de inicio:
+	-Nombre de la aplicacion
+	-3 opciones : juego, COnfiguracion creditos
+-Configurtacion:
+	- Parametros torres configurables
+- creditos nombre de integrantes
+-opcion de volver al menu inicial en todos los casos
+-juego:
+	-	- la bola masa suficiente para derribvar parte del muro
+	- bola dsale frontal en linea recta
+	- en la esquina superior izquierda contador de numero de bolas lanzadas
+	- esquina superior derecha % de ladrillos derribados
+	-porcentaje configurable 90% ventana flotante
+	 numero de bolas y el nº de ladriillos
