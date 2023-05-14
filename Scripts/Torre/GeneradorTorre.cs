@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using UnityEngine.UI;
 
 public class GeneradorTorre : MonoBehaviour
 {
@@ -17,18 +18,21 @@ public class GeneradorTorre : MonoBehaviour
      public Transform carta;
     public Transform Papa;
 
+    public InvisibleTrigger InvisibleTrigger;
+    public Text PorcentajeDerribos;
     private void rigido(GameObject objeto){
          if (rigid){
              objeto.AddComponent<Rigidbody>();
          }
-     }
+    }
     
 
    
 
 
     public void construirTorre()
-    {   if (!PreviamenteConstruido){
+    {   
+        if (!PreviamenteConstruido){
             PreviamenteConstruido=true;
             
             GameObject plano = cuboPrimitivo();
@@ -173,7 +177,10 @@ public class GeneradorTorre : MonoBehaviour
          newMaterial.color = new Color(r, g, b);
          return newMaterial;
     }
-
+    void Update(){
+        int derribados =  InvisibleTrigger.cuentaLadrillos;
+        PorcentajeDerribos.text = "Derribados: " + derribados.ToString();
+    }
 
 
 }

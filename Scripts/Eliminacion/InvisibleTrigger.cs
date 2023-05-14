@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InvisibleTrigger : MonoBehaviour
 {
-    private int cuentaLadrillos = 0;
+    public int cuentaLadrillos = 0;
     public int getCuentaLadrillos()
     {
         return cuentaLadrillos;
@@ -16,14 +16,14 @@ public class InvisibleTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Acciones cuando otro objeto entra en el trigger invisible
-        Debug.Log("Entró en el trigger invisible: " + other.name);
+        
         GameObject collidedObject = other.gameObject;
         MeshFilter meshFilter = collidedObject.GetComponent<MeshFilter>();
 
         // Comprobar si la malla asociada es un cubo
         if (meshFilter != null && meshFilter.mesh != null && meshFilter.mesh.name == "Cube Instance")
         {
-            Debug.Log("El GameObject es un cubo.");
+            
             sumaLadrillo();
         }
         else
@@ -36,12 +36,12 @@ public class InvisibleTrigger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // Acciones cuando otro objeto sale del trigger invisible
-        //Debug.Log("Salió del trigger invisible: " + other.name);
+        //Debug.Log("Saliï¿½ del trigger invisible: " + other.name);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // Acciones mientras otro objeto está en el trigger invisible
+        // Acciones mientras otro objeto estï¿½ en el trigger invisible
         //Debug.Log("Permanece en el trigger invisible: " + other.name);
     }
 }
