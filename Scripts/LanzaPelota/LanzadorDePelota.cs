@@ -20,7 +20,7 @@ public class LanzadorDePelota : MonoBehaviour
     void LanzarPelota()
     {
         GameObject pelota = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        contadorPelotas++;
+        cuentaPelotas++;
         //pelota.transform.parent = parentObject; // establece el padre del objeto creado
         pelota.AddComponent<Rigidbody>();
 
