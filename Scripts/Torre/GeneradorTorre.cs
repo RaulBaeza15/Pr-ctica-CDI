@@ -182,7 +182,13 @@ public class GeneradorTorre : MonoBehaviour
     if (ScriptTrigger != null && PorcentajeDerribos != null)
         {
         int derribados = ScriptTrigger.cuentaLadrillos;
-        PorcentajeDerribos.text = "Totales: "+contadorLadrillos.ToString()+", Derribados: " + derribados.ToString();
+        if (contadorLadrillos!=0){
+            int porcentaje = (int)((derribados / (float)contadorLadrillos) * 100);
+
+            PorcentajeDerribos.text = "Porcentaje de ladrillos derribados: " + porcentaje.ToString() + "%";
+
+        }
+        
         }
     }
 
