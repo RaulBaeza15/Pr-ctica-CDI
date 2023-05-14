@@ -12,13 +12,13 @@ public class GeneradorTorre : MonoBehaviour
      public bool cuadrada = true;
      public bool rigid =true;
      bool PreviamenteConstruido=false;
-     int contadorLadrillos = 0;
+      int contadorLadrillos = 0;
      float inicioX ;
      float inicioZ;
      public Transform carta;
     public Transform Papa;
 
-    public InvisibleTrigger InvisibleTrigger;
+    public InvisibleTrigger ScriptTrigger;
     public Text PorcentajeDerribos;
     private void rigido(GameObject objeto){
          if (rigid){
@@ -177,10 +177,15 @@ public class GeneradorTorre : MonoBehaviour
          newMaterial.color = new Color(r, g, b);
          return newMaterial;
     }
-    void Update(){
-        int derribados =  InvisibleTrigger.cuentaLadrillos;
-        PorcentajeDerribos.text = "Derribados: " + derribados.ToString();
+    void Update()
+    {
+    if (ScriptTrigger != null && PorcentajeDerribos != null)
+        {
+        int derribados = ScriptTrigger.cuentaLadrillos;
+        PorcentajeDerribos.text = "Totales: "+contadorLadrillos.ToString()+", Derribados: " + derribados.ToString();
+        }
     }
+
 
 
 }
