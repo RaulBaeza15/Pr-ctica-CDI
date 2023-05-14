@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class LanzadorDePelota : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class LanzadorDePelota : MonoBehaviour
     public float fuerzaLanzamiento = 100f;
     public float tiempoDeVida = 10f;
     public int cuentaPelotas =0;
+    public Text contadorPelotasText;
 
     void Update()
     {
@@ -15,6 +18,7 @@ public class LanzadorDePelota : MonoBehaviour
         {
             LanzarPelota();
         }
+        contadorPelotasText.text = "Pelotas: " + cuentaPelotas.ToString();
     }
 
     void LanzarPelota()
