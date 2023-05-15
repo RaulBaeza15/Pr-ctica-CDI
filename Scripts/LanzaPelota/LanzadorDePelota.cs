@@ -1,7 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+<<<<<<< HEAD
 using TMPro;
+=======
+>>>>>>> refs/remotes/origin/main
 
 
 public class LanzadorDePelota : MonoBehaviour
@@ -11,6 +14,7 @@ public class LanzadorDePelota : MonoBehaviour
     public float fuerzaLanzamiento = 100f;
     public float tiempoDeVida = 10f;
     public int cuentaPelotas =0;
+<<<<<<< HEAD
     public TextMeshProUGUI contadorPelotasText;
     public TextMeshProUGUI contadorFinal;
 
@@ -19,6 +23,9 @@ public class LanzadorDePelota : MonoBehaviour
     {
         contadorPelotasText.text = "0";
     }
+=======
+    public Text contadorPelotasText;
+>>>>>>> refs/remotes/origin/main
 
     void Update()
     {
@@ -26,8 +33,12 @@ public class LanzadorDePelota : MonoBehaviour
         {
             LanzarPelota();
         }
+<<<<<<< HEAD
         contadorPelotasText.text = cuentaPelotas.ToString();
         contadorFinal.text = contadorPelotasText.text;
+=======
+        contadorPelotasText.text = "Pelotas: " + cuentaPelotas.ToString();
+>>>>>>> refs/remotes/origin/main
     }
 
     public void LanzarPelota()

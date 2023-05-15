@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 using UnityEngine.UI;
+<<<<<<< HEAD
 using TMPro;
+=======
+>>>>>>> refs/remotes/origin/main
 
 public class GeneradorTorre : MonoBehaviour
 {
@@ -45,6 +48,8 @@ public class GeneradorTorre : MonoBehaviour
         
     }
 
+    public InvisibleTrigger ScriptTrigger;
+    public Text PorcentajeDerribos;
     private void rigido(GameObject objeto){
          if (rigid){
              objeto.AddComponent<Rigidbody>();
@@ -207,6 +212,7 @@ public class GeneradorTorre : MonoBehaviour
     if (ScriptTrigger != null && PorcentajeDerribos != null)
         {
         int derribados = ScriptTrigger.cuentaLadrillos;
+<<<<<<< HEAD
         float contador = (derribados / contadorLadrillos)*100;
         PorcentajeDerribos.text = contador.ToString();
         if(contador >= porcentaje){
@@ -217,6 +223,15 @@ public class GeneradorTorre : MonoBehaviour
             pelotas.contadorPelotasText.enabled = false;
             pelotas.contadorFinal.enabled =true;
         }
+=======
+        if (contadorLadrillos!=0){
+            int porcentaje = (int)((derribados / (float)contadorLadrillos) * 100);
+
+            PorcentajeDerribos.text = "Porcentaje de ladrillos derribados: " + porcentaje.ToString() + "%";
+
+        }
+        
+>>>>>>> refs/remotes/origin/main
         }
     }
 
