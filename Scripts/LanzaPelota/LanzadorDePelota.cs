@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class LanzadorDePelota : MonoBehaviour
 {
@@ -7,6 +10,15 @@ public class LanzadorDePelota : MonoBehaviour
     public GameObject puntoDeLanzamiento;
     public float fuerzaLanzamiento = 100f;
     public float tiempoDeVida = 10f;
+    public int cuentaPelotas =0;
+    public TextMeshProUGUI contadorPelotasText;
+    public TextMeshProUGUI contadorFinal;
+
+
+    void start()
+    {
+        contadorPelotasText.text = "0";
+    }
 
     void Update()
     {
@@ -14,11 +26,14 @@ public class LanzadorDePelota : MonoBehaviour
         {
             LanzarPelota();
         }
+        contadorPelotasText.text = cuentaPelotas.ToString();
+        contadorFinal.text = contadorPelotasText.text;
     }
 
-    void LanzarPelota()
+    public void LanzarPelota()
     {
         GameObject pelota = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        cuentaPelotas++;
         //pelota.transform.parent = parentObject; // establece el padre del objeto creado
         pelota.AddComponent<Rigidbody>();
 

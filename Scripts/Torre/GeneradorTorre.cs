@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
+using UnityEngine.UI;
+using TMPro;
 
 public class GeneradorTorre : MonoBehaviour
 {
@@ -11,24 +13,51 @@ public class GeneradorTorre : MonoBehaviour
      public bool cuadrada = true;
      public bool rigid =true;
      bool PreviamenteConstruido=false;
-     int contadorLadrillos = 0;
+      int contadorLadrillos = 0;
      float inicioX ;
      float inicioZ;
      public Transform carta;
+     public int porcentaje = 90;
     public Transform Papa;
+    public GameObject pantallaFinal;
+    public ControladorEventos eventos;
+
+    public InvisibleTrigger ScriptTrigger;
+    public TextMeshProUGUI PorcentajeDerribos;
+    public TextMeshProUGUI PorcentajeFinal;
+    private LanzadorDePelota pelotas;
+
+    void start(){
+        PorcentajeDerribos.text = "0";
+        bool torre = eventos.botonSeleccion;
+        porcentaje = int.Parse(eventos.porcentaje.text);
+        if(torre){
+            anchoX = int.Parse(eventos.CLado.text);
+            anchoX = anchoZ;
+            altura = int.Parse(eventos.CAltura.text);
+        }  
+        else{
+            altura = int.Parse(eventos.RAltura.text);
+            anchoX = int.Parse(eventos.RLado1.text);
+            anchoZ = int.Parse(eventos.RLado2.text);
+
+        }
+        
+    }
 
     private void rigido(GameObject objeto){
          if (rigid){
              objeto.AddComponent<Rigidbody>();
          }
-     }
+    }
     
 
    
 
 
     public void construirTorre()
-    {   if (!PreviamenteConstruido){
+    {   
+        if (!PreviamenteConstruido){
             PreviamenteConstruido=true;
             
             GameObject plano = cuboPrimitivo();
@@ -173,14 +202,24 @@ public class GeneradorTorre : MonoBehaviour
          newMaterial.color = new Color(r, g, b);
          return newMaterial;
     }
+    void Update()
+    {
+    if (ScriptTrigger != null && PorcentajeDerribos != null)
+        {
+        int derribados = ScriptTrigger.cuentaLadrillos;
+        float contador = (derribados / contadorLadrillos)*100;
+        PorcentajeDerribos.text = contador.ToString();
+        if(contador >= porcentaje){
+            PorcentajeFinal.text = PorcentajeDerribos.text;
+            pantallaFinal.SetActive(true);
+            PorcentajeDerribos.enabled = false;
+            PorcentajeFinal.enabled = true;
+            pelotas.contadorPelotasText.enabled = false;
+            pelotas.contadorFinal.enabled =true;
+        }
+        }
+    }
 
 
 
 }
-    
-
-
-
-
-
-
